@@ -1,0 +1,11 @@
+# https://blog.nrwl.io/using-apollo-graphql-with-angular-in-an-nx-workspace-9ad0155c1914
+
+type State {
+  id: Int!
+  name: String
+  code: String
+}
+
+type Query {
+  states: [State]
+}

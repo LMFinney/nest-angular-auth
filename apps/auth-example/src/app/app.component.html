@@ -1,1 +1,5 @@
-<div>Message: {{ hello$ | async | json }}</div>
+<h2>Message (via REST)</h2>
+<div>{{ (hello$ | async).message }}</div>
+
+<h2>Original States (via GraphQL)</h2>
+<div *ngFor="let state of states$ | async">{{ state.name }}</div>

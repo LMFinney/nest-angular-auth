@@ -205,6 +205,48 @@
           }
         }
       }
+    },
+    "data-access": {
+      "projectType": "library",
+      "root": "libs/data-access",
+      "sourceRoot": "libs/data-access/src",
+      "prefix": "nest-angular-auth",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data-access/tsconfig.lib.json",
+              "libs/data-access/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/data-access/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data-access/jest.config.js",
+            "tsConfig": "libs/data-access/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/data-access/src/test-setup.ts"
+          }
+        },
+        "generate": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx graphql-codegen --config libs/data-access/codegen.yml"
+              }
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
