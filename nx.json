@@ -38,7 +38,13 @@
     "data-access": {
       "tags": []
     },
+    "feature-auth": {
+      "tags": []
+    },
     "feature-home": {
+      "tags": []
+    },
+    "util-auth": {
       "tags": []
     }
   }

@@ -282,6 +282,70 @@
           "style": "scss"
         }
       }
+    },
+    "feature-auth": {
+      "projectType": "library",
+      "root": "libs/feature/auth",
+      "sourceRoot": "libs/feature/auth/src",
+      "prefix": "nest-angular-auth",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature/auth/tsconfig.lib.json",
+              "libs/feature/auth/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/feature/auth/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/feature/auth/jest.config.js",
+            "tsConfig": "libs/feature/auth/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/feature/auth/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "util-auth": {
+      "projectType": "library",
+      "root": "libs/util/auth",
+      "sourceRoot": "libs/util/auth/src",
+      "prefix": "nest-angular-auth",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/util/auth/tsconfig.lib.json",
+              "libs/util/auth/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/util/auth/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/util/auth/jest.config.js",
+            "tsConfig": "libs/util/auth/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/util/auth/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

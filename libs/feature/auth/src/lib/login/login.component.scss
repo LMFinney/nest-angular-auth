@@ -1,0 +1,14 @@
+:host {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+
+  form {
+    display: grid;
+    width: 400px;
+  }
+
+  .error-message {
+    color: #b00020;
+  }
+}

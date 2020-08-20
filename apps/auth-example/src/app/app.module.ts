@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { GraphQLModule } from './graphql.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [AppComponent],
