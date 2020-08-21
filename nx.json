@@ -37,6 +37,9 @@
     },
     "data-access": {
       "tags": []
+    },
+    "feature-home": {
+      "tags": []
     }
   }
 }
