@@ -3,15 +3,11 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { defer, merge, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
+import { User } from '@nest-angular-auth/api-interfaces';
 
 export interface Credentials {
   username: string;
   password: string;
-}
-
-interface User {
-  username: string;
-  displayName: string;
 }
 
 const storageKey = 'lamproUser';

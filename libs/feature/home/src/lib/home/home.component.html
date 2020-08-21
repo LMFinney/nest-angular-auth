@@ -4,7 +4,11 @@
   </a>
   <a mat-flat-button routerLinkActive="mat-accent" routerLink="gql">
     <span>GraphQL</span>
-  </a></mat-toolbar
->
+  </a>
+  <span>{{ currentUser$ | async }}</span>
+  <button mat-stroked-button (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>
 
 <router-outlet></router-outlet>
