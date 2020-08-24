@@ -8,10 +8,14 @@ import { StatesResolver } from './states/states.resolver';
 
 @Module({
   imports: [
+    AuthModule,
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
+      context: ({ req }) => {
+        console.log('is undefined', req === undefined);
+        return { req };
+      },
     }),
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, StatesResolver],

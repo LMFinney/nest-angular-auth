@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '@nest-angular-auth/api-interfaces';
 import { defer, merge, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
-import { User } from '@nest-angular-auth/api-interfaces';
 
 export interface Credentials {
   username: string;
@@ -22,11 +21,7 @@ export class AuthService {
   private readonly userTrigger$ = new ReplaySubject<User | undefined>();
   readonly currentUser$: Observable<User | undefined>;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+  constructor(private http: HttpClient) {
     this.currentUser$ = merge(
       // check whether we are already logged in for an initial value
       defer(() => this.fetchUser()),
@@ -36,15 +31,11 @@ export class AuthService {
   }
 
   /**
-   * Log in to the authentication system on the server. Also, store the result
-   * in the local storage, so other tabs can be logged in, too.
+   * Log in to the authentication system on the server.
    */
   async login(credentials: Credentials) {
     const user = await this.http
-      .post<User>('/api/auth/login', credentials, {
-        // todo: let the interceptor handle this when gql calls are protected
-        withCredentials: true,
-      })
+      .post<User>('/api/auth/login', credentials)
       .toPromise();
 
     this.userTrigger$.next(user);
@@ -53,20 +44,10 @@ export class AuthService {
   }
 
   /**
-   * Log out of the authentication system on the server. Also, clear the user
-   * in the local storage, so other tabs will be logged out, too.
+   * Log out of the authentication system on the server.
    */
   async logout() {
-    await this.http
-      .post(
-        '/api/auth/logout',
-        {},
-        {
-          // todo: let the interceptor handle this when gql calls are protected
-          withCredentials: true,
-        }
-      )
-      .toPromise();
+    await this.http.post('/api/auth/logout', {}).toPromise();
 
     this.userTrigger$.next(undefined);
   }
@@ -78,10 +59,7 @@ export class AuthService {
   fetchUser() {
     return (
       this.http
-        .get<User>('/api/auth/user', {
-          // todo: let the interceptor handle this when gql calls are protected
-          withCredentials: true,
-        })
+        .get<User>('/api/auth/user')
         // when there's an error, it means there's no backend session, so clear
         // the user.
         .pipe(catchError(() => of(undefined)))

@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
+import { GqlAuthGuard } from '../auth/gql-login.guard';
 
 export interface State {
   id: number;
@@ -24,6 +26,7 @@ export class StatesResolver {
     { id: 13, code: 'RI', name: 'Rhode Island' },
   ];
 
+  @UseGuards(GqlAuthGuard)
   @Query('states')
   getAllSets(): State[] {
     return this.states;

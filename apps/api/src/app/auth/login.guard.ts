@@ -14,9 +14,13 @@ import { AuthGuard } from '@nestjs/passport';
 @Injectable()
 export class LoginGuard extends AuthGuard('local') {
   async canActivate(context: ExecutionContext) {
+    console.log('LoginGuard');
+    // login the Rest request
     const result = (await super.canActivate(context)) as boolean;
+    console.log('LoginGuard', { result });
     const request = context.switchToHttp().getRequest();
     await super.logIn(request);
+
     return result;
   }
 }
